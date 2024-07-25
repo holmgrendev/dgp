@@ -75,8 +75,8 @@ func exampleHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 
 		// Define example page
-		p := Page{Title: "DOGOW Template", Body: "Hello DOGOW"}
-		t, err := template.ParseFiles("./templates/pages/default.html")
+		p := Page{Title: "DGP Template", Body: "Hello DGP"}
+		t, err := template.ParseFiles("./templates/pages/default.html", "./templates/elements/div.template.html")
 
 		if err != nil {
 			log.Printf("Error parsing template:\n%s\n", err)
