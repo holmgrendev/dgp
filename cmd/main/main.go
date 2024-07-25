@@ -3,47 +3,14 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"holmgrendev/dgp/internal/database"
 	"holmgrendev/dgp/internal/router"
 	"html/template"
 	"log"
 	"net/http"
-	"os"
-
-	_ "github.com/lib/pq"
 )
 
-//var db *sql.DB
-
-var dbc = initDatabase()
-
-type DatabaseCredentials struct {
-	Host     string
-	Database string
-	User     string
-	Password string
-}
-
-func initDatabase() DatabaseCredentials {
-	// Set default credentials
-	dbc := DatabaseCredentials{Host: "localhost", Database: os.Getenv("POSTGRES_DB"), User: "postgres", Password: os.Getenv("POSTGRES_PASSWORD")}
-
-	// Check user
-	if os.Getenv("POSTGRES_USER") != "" {
-		dbc.User = os.Getenv("POSTGRES_USER")
-	}
-
-	// Check database
-	if dbc.Database == "" {
-		dbc.Database = dbc.User
-	}
-
-	// Check host
-	if os.Getenv("POSTGRES_HOST") != "" {
-		dbc.Host = os.Getenv("POSTGRES_HOST")
-	}
-
-	return dbc
-}
+var db *sql.DB
 
 func main() {
 
@@ -65,7 +32,9 @@ type Page struct {
 
 func exampleHandler(w http.ResponseWriter, r *http.Request) {
 
-	db, _ := sql.Open("postgres", fmt.Sprintf("host=%s dbname=%s user=%s password=%s sslmode=disable", dbc.Host, dbc.Database, dbc.User, dbc.Password))
+	dbc := database.InitDatabase()
+
+	db, _ = sql.Open("postgres", fmt.Sprintf("host=%s dbname=%s user=%s password=%s sslmode=disable", dbc.Host, dbc.Database, dbc.User, dbc.Password))
 
 	err := db.Ping()
 
