@@ -1,4 +1,4 @@
-module holmgrendev/gowebdocker
+module holmgrendev/dgp
 
 go 1.22.5
 
