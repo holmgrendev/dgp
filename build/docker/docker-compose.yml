@@ -1,0 +1,33 @@
+services:
+  web:
+    container_name: dgp-web
+    restart: always
+    build: .
+    environment:
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    depends_on:
+      - db
+    ports:
+      - "3080:3080"
+    networks:
+      - dgp-default
+
+  db:
+    container_name: dgp-db
+    restart: always
+    image: postgres:16.3
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5432:5432"
+    networks:
+      - dgp-default
+
+networks:
+  dgp-default:
+    name: dgp-default
