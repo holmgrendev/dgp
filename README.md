@@ -29,23 +29,41 @@ You can try the code before doing anything by executing the build and start comm
 
 # Folder structure
 dgp/
+
 ├─ build/
+
 │  ├─ docker/
+
 │  │  ├─ .env-sample
+
 │  ├─ docker.sh
+
 ├─ cmd/
+
 │  ├─ main/
+
 │  │  ├─ main.go
+
 ├─ internal/
+
 │  ├─ (package).../
+
 │  │  ├─ (package.go)
+
 ├─ public/
+
 │  ├─ assets/
+
 │  │  ├─ images/
+
 │  │  ├─ scripts/
+
 │  │  ├─ styles/
+
 │  ├─ templates/
+
 │  │  ├─ elements/
+
 │  │  ├─ pages/
 
 ## Information about files and folders
